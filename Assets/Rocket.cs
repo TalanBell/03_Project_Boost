@@ -26,11 +26,11 @@ public class Rocket : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.A))  // Can thrust whilst rotating
         {
-            print("Rotating left");
+            transform.Rotate(Vector3.forward);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            print("Rotating right");
+            transform.Rotate(-Vector3.forward);
         }
 
     }
