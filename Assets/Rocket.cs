@@ -8,47 +8,53 @@ public class Rocket : MonoBehaviour {
     Rigidbody rigidBody;
     AudioSource rocketSound;
 
-    bool m_Play;
-    bool m_ToggleChange;  // to check sound only plays once
-
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
         rocketSound = GetComponent<AudioSource>();
-        m_Play = true;
-        m_ToggleChange = true;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        ProcessInput();
+        Thrust();
+        Rotate();
 	}
 
-    private void ProcessInput()
+    private void Thrust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
             rigidBody.AddRelativeForce(Vector3.up);
-            if (m_Play == true && m_ToggleChange == true)
+            if (!rocketSound.isPlaying)  // to check sound only plays once
             {
                 rocketSound.Play();
-                m_ToggleChange = false;
             }
         }
         else
         {
             rocketSound.Stop();
-            m_ToggleChange = true;
         }
+    }
+    private void Rotate()
+    {
+        rigidBody.freezeRotation = true;  // take manual control of rotation
 
         if (Input.GetKey(KeyCode.A))  // Can thrust whilst rotating
         {
-            transform.Rotate(Vector3.right);
+            transform.Rotate(Vector3.forward);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(Vector3.left);
+            transform.Rotate(-Vector3.forward);
         }
 
+        rigidBody.freezeRotation = false;  // resume physics control of rotation
+
+        // reapply constraints
+        rigidBody.constraints = RigidbodyConstraints.FreezeRotationX
+            | RigidbodyConstraints.FreezeRotationY
+            | RigidbodyConstraints.FreezePositionZ;
     }
+
+
 }

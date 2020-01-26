@@ -9,3 +9,4 @@ Following the Udemy/GameDev.tv course 'Complete C# Unity Developer'. (v number i
 * v43 - Physics & Rigidbodies (and v42 basic input binding)
 * v44 - Adding in rotation (but not frame-rate independence yet)
 * v47 - Adding a touch of audio (and trying out chicken model instead of rocket)
+* v48 - Resolving movement bugs - also back to rocket model
