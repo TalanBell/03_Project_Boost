@@ -11,3 +11,4 @@ Following the Udemy/GameDev.tv course 'Complete C# Unity Developer'. (v number i
 * v47 - Adding a touch of audio (and trying out chicken model instead of rocket)
 * v48 - Resolving movement bugs - also back to rocket model
 * v49 - Using [SerializeField] vs public
+* v50 - Tagging game objects as Friendly - plus changing to Physical camera to remove fish-eye look

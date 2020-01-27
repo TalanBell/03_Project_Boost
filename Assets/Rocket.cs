@@ -6,7 +6,7 @@ using UnityEngine;
 public class Rocket : MonoBehaviour
 {
     [SerializeField] float rcsThrust = 100f;
-    [SerializeField] float mainThrust = 100f;
+    [SerializeField] float mainThrust = 10f;
 
     Rigidbody rigidBody;
     AudioSource rocketSound;
@@ -16,20 +16,47 @@ public class Rocket : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         rocketSound = GetComponent<AudioSource>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    foreach (ContactPoint contact in collision.contacts)
+    //    {
+    //        Debug.DrawRay(contact.point, contact.normal, Color.white);
+    //    }
+    //    if (collision.relativeVelocity.magnitude > 2)
+    //        audioSource.Play();
+    //}
+
+    // Update is called once per frame
+    void Update () {
         Thrust();
         Rotate();
 	}
 
+    void OnCollisionEnter(Collision collision)
+    {
+        switch(collision.gameObject.tag)
+        {
+            case "Friendly":
+                // do nothing
+                print("OK");  //TODO remove this line
+                break;
+            case "Fuel":
+                // if fuel object, add fuel
+                print("Fuel");  //TODO remove this line
+                break;
+            default:
+                // kill player
+                print("Dead!");  //TODO remove this line
+                break;
+        }
+    }
+
     private void Thrust()
     {
-        float thrustThisFrame = mainThrust * Time.deltaTime;
-
         if (Input.GetKey(KeyCode.Space))
         {
-            rigidBody.AddRelativeForce(Vector3.up * thrustThisFrame);
+            rigidBody.AddRelativeForce(Vector3.up * mainThrust);
             if (!rocketSound.isPlaying)  // to check sound only plays once
             {
                 rocketSound.Play();
