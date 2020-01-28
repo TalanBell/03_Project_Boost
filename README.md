@@ -13,3 +13,4 @@ Following the Udemy/GameDev.tv course 'Complete C# Unity Developer'. (v number i
 * v49 - Using [SerializeField] vs public
 * v50 - Tagging game objects as Friendly - plus changing to Physical camera to remove fish-eye look
 * v51 - Basic level design
+* v52 - Design levers and variations - only backdrop prefabbed actually
